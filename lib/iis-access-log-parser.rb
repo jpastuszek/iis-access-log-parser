@@ -29,12 +29,23 @@ class IISAccessLogParser
 
 			user_agent.tr!('+', ' ')
 
-			Entry.new(date, server_ip, method, url, query, port, username, client_ip, user_agent, status, substatus, win32_status, time_taken, other)
+			self.new(date, server_ip, method, url, query, port, username, client_ip, user_agent, status, substatus, win32_status, time_taken, other)
 		end
 	end
 
-	def initialize(log_file)
+	def self.from_file(log_file)
+		File.open(log_file, 'r') do |io|
+			self.new(io) do |entry|
+				yield entry
+			end
+		end
+	end
 
+	def initialize(io)
+		io.each_line do |line|
+			next if line[0,1] == '#'
+			yield Entry.from_string(line)
+		end
 	end
 end
 

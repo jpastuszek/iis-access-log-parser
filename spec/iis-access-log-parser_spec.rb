@@ -37,3 +37,15 @@ describe "IISAccessLogParser::Entry" do
 		e.user_agent.should == "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; GTB6.6; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; aff-kingsoft-ciba; .NET4.0C; MASN; AskTbSTC/5.8.0.12304)"
 	end
 end
+
+describe "IISAccessLogParser" do
+	it "should allow reading entries from file" do
+		last = nil
+		IISAccessLogParser.from_file('spec/data/short.log') do |entry|
+			last = entry
+		end
+
+		last.url.should == '/dentists/uk/leicestershire/little-bowden/invisalign/index.aspx'
+	end
+end
+
