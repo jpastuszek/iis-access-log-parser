@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "iis-access-log-parser.gemspec",
     "lib/iis-access-log-parser.rb",
     "spec/data/short.log",
     "spec/iis-access-log-parser_spec.rb",
