@@ -27,7 +27,7 @@ class IISAccessLogParser
 			username = nil if username == '-'
 			user_agent = nil if user_agent == '-'
 
-			user_agent.tr!('+', ' ')
+			user_agent.tr!('+', ' ') unless user_agent.nil?
 
 			self.new(date, server_ip, method, url, query, port, username, client_ip, user_agent, status, substatus, win32_status, time_taken, other)
 		end
