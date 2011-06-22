@@ -1,4 +1,5 @@
 require 'ip'
+require 'time'
 
 class IISAccessLogParser
 	#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) sc-status sc-substatus sc-win32-status time-taken
@@ -9,6 +10,24 @@ class IISAccessLogParser
 
 			x, date, server_ip, method, url, query, port, username, client_ip, user_agent, status, substatus, win32_status, time_taken, y, other = *line.match(/^([^ ]* [^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*)($| )(.*)/)
 			raise ArgumentError, "bad format: '#{line}'" unless x
+
+			date = Time.parse(date + ' UTC')
+
+			server_ip = IP.new(server_ip)
+			client_ip = IP.new(client_ip)
+
+			port = port.to_i
+			status = status.to_i
+			substatus = substatus.to_i
+			win32_status = win32_status.to_i
+
+			time_taken = time_taken.to_f / 1000
+
+			query = nil if query == '-'
+			username = nil if username == '-'
+			user_agent = nil if user_agent == '-'
+
+			user_agent.tr!('+', ' ')
 
 			Entry.new(date, server_ip, method, url, query, port, username, client_ip, user_agent, status, substatus, win32_status, time_taken, other)
 		end
