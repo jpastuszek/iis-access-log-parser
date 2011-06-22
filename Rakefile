@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "iis-access-log-parser"
   gem.homepage = "http://github.com/jpastuszek/iis-access-log-parser"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Parser for IIS access logs"
+  gem.description = "Class that can read ISS log file and iterate over parsed log entries."
   gem.email = "jpastuszek@gmail.com"
   gem.authors = ["Jakub Pastuszek"]
   # dependencies defined in Gemfile
