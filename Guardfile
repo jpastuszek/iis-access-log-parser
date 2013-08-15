@@ -22,3 +22,5 @@ guard 'rspec', :version => 2 do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+notification :tmux
+

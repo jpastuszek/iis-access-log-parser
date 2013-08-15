@@ -11,7 +11,7 @@ group :development do
   #gem 'simplecov-rcov'
   gem 'simplecov'
   #gem "rcov", ">= 0"
-  gem 'pry-rails'
+  gem 'pry'
   gem 'pry-nav'
   gem 'guard'
   gem 'guard-rspec'
